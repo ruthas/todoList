@@ -1,0 +1,68 @@
+html{
+    font-family: Helvetica, sans-serif;
+    font-size: 21px;
+    box-sizing: border-box;
+    background: palevioletred center no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.list-wrapper {
+    padding: 20px;
+    background: rgba(255,255,255,0.95);
+  }
+  
+  h1 {
+    text-align: center;
+    margin: 0;
+    font-weight: 200;
+  }
+  
+  .to-do-list {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    list-style: none;
+  }
+  
+  .to-do-list li {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 10px 0;
+    font-weight: 100;
+    display: flex;
+  }
+  
+  .to-do-list label {
+    flex: 1;
+    cursor: pointer;
+  }
+  
+  .to-do-list input {
+    display: none;
+  }
+  
+  .to-do-list input + label:before {
+    content: '⬜️';
+    margin-right: 10px;
+  }
+  
+  .to-do-list input:checked + label:before {
+    content: '🎉';
+  }
+  
+  .add-items {
+    margin-top: 20px;
+  }
+  
+  .add-items input {
+    padding: 10px;
+    outline: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  
