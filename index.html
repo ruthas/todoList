@@ -1,46 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="style/style.css">
-   
-    <title>To do list</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link
+			rel="stylesheet"
+			href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+		/>
+		<link rel="stylesheet" href="style/style.css" />
 
-  </head>
-  <body>
+		<title>To do list</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div id="title-container"></div>
 
+			<div class="col-12 list-wrapper">
+				<div class="task-container"></div>
 
-    <div class="container-fluid">
-      <script id="title-template" type="text/x-handlebars-template">
-         <h1>{{title}}</h1>
-      </script>
-    
-     
-        <div class="col-12 list-wrapper">
-        <ul class="to-do-list">
-          {{#each tasks}}
-          <li>{{this}}</li>
-            {{else}}
-            <li>To do list is empty...</li>
-            
-          {{/each}}
-        </ul>
-  
-        <form class="add-items">
-          <input type="text" name="item" placeholder="Enter your task" required />
-          <input type="date" name="duedate" placeholder="Enter your task" required />
-          <input type="submit" value=" + Add Item " />
-        </form>
-      </div>
-    </div>
-      
+				<form class="add-items">
+					<input
+						type="text"
+						name="item"
+						placeholder="Enter your task"
+						required
+					/>
+					<input type="date" name="duedate" required />
+					<input type="submit" value=" + Add Item " />
+				</form>
+			</div>
+		</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.7/handlebars.min.js"></script>
-    <script src="script.js"></script>
-    <script	src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
-    <script	src="./node_modules/popper.js/dist/popper.min.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  </body>
+		<script id="title-template" type="text/x-handlebars-template">
+			<h1>
+				{{title}}
+			</h1>
+		</script>
+
+		<script id="task-template" type="text/x-handlebars-template">
+			<ul class='to-do-list'>
+				{{#items}}
+					<li>
+						{{text}} - &nbsp; Complete by: &nbsp;
+						<b>
+							{{date}}
+						</b>
+					</li>
+				{{/items}}
+			</ul>
+		</script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.7/handlebars.min.js"></script>
+		<script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+		<script src="./node_modules/popper.js/dist/popper.min.js"></script>
+		<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="script.js"></script>
+	</body>
 </html>

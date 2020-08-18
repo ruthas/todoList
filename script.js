@@ -1,59 +1,67 @@
 /* eslint-disable no-undef */
-const addItems = document.querySelector(".add-items");
-const itemsList = document.querySelector(".to-do-list");
-const items = JSON.parse(localStorage.getItem("items")) || [];
+const addItems = $('.add-items')
+const itemsList = $('.to-do-list')
+const items = JSON.parse(localStorage.getItem('items')) || []
 
-function addItem(e) {
-	e.preventDefault(); 
+function addItem (e) {
+  e.preventDefault()
 
-	const itemName = this.querySelector("[name=item]").value;
-	const dueDate = this.querySelector("[name=duedate]").value;
-	
-	const item = {
-		text: itemName,
-		date: dueDate,
-		done: false,
-	};
+  const itemName = $('[name=item]').val()
+  const dueDate = $('[name=duedate]').val()
 
-	items.push(item);
+  const item = {
+    text: itemName,
+    date: dueDate,
+    done: false
+  }
 
-	PopulateListWithItems(itemsList, items);
+  items.push(item)
 
-	localStorage.setItem("items", JSON.stringify(items)); 
+  PopulateListWithItems(itemsList, items)
 
-	this.reset();
+  localStorage.setItem('items', JSON.stringify(items))
+
+  this.reset()
 }
 
-function toggleDone(e) {
-	if (!e.target.matches("input")) return; // skip this unless it's an input
-	const el = e.target;
-	const index = el.dataset.index;
-	items[index].done = !items[index].done;
-	localStorage.setItem("items", JSON.stringify(items));
-	PopulateListWithItems(items, itemsList);
+function toggleDone (e) {
+  if (!e.target.matches('input')) return
+  const el = e.target
+  const index = el.dataset.index
+  items[index].done = !items[index].done
+  localStorage.setItem('items', JSON.stringify(items))
+  PopulateListWithItems(items, itemsList)
 }
 
+// function PopulateListWithItems (itemsList, items = []) {
+//   itemsList.innerHTML = items.map((item, i) => {
+//     return `
+//         <li>
+//           <input type="checkbox" data-index=${i} id="item${i}" ${item.done ? 'checked' : ''} />
+//           <label for="item${i}">${item.text}<br/>Due: ${item.date}</label>
+//         </li>
+//       `
+//   }).join('')
+// }
 
-function PopulateListWithItems(itemsList, items = []) {
-	itemsList.innerHTML = items.map((item, i) => {
-		return `
-        <li>
-          <input type="checkbox" data-index=${i} id="item${i}" ${item.done ? "checked" : ""} />
-          <label for="item${i}">${item.text}<br/>Due: ${item.date}</label>
-        </li>
-      `;
-	}).join("");
+function PopulateListWithItems () {
+  var taskTemplate = $('#task-template').html()
+  var compileTaskTemplate = Handlebars.compile(taskTemplate)
+  var html = compileTaskTemplate({
+    items: items
+  })
+
+  $('#task-container').empty().append(html)
 }
 
-addItems.addEventListener("submit", addItem);
-itemsList.addEventListener("click", toggleDone);
-PopulateListWithItems(itemsList, items);
+addItems.on('submit', addItem)
+itemsList.on('click', toggleDone)
+PopulateListWithItems()
 
+var titleTemplate = $('title-template').html()
+var titleTemplateC = Handlebars.compile(titleTemplate)
 
-var source = document.getElementById("tasks-template").innerHTML;
-var template = Handlebars.compile(source);
+var context = { title: 'TO DO LIST' }
+var html = titleTemplateC(context)
 
-var context = {title: "TO DO LIST"};
-var html = template(context);
-
-$("#title-template").html(html);
+$('#title-container').empty().append(html)
